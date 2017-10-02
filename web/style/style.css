@@ -1,0 +1,12 @@
+body {
+  background-color: #678678;
+}
+form input > a {
+  border: 1px solid;
+}
+.bkt .mnu.foo .__left .__btn {
+  border: 1px solid #808080;
+}
+.bkt .mnu.foo .__left:hover {
+  color: #008000;
+}
