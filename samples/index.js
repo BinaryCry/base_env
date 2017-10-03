@@ -1,68 +1,66 @@
 import { createStore } from 'redux';
-import { SET_VISIBILITY_FILTER, ADD_TODO, TOGGLE_TODO, VisibilityFilters } from './actions';
 
+// filters
+const showAll = 'SHOW_ALL';
+const showAct = 'SHOW_ACTIVE';
+const showSuc = 'SHOW_SUCCESS';
+
+// actions
+const add = 'ADD_TODO_ITEM';
+const rmv = 'REMOVE_TODO_ITEM';
+const tgl ='TOGGLE_TODO_ITEM';
+const visblFilter ='SET_VISIBILITY_FILTER';
 
 let initialState = {
-    visibilityFilter: VisibilityFilters.SHOW_ALL,
-    todos: []
+    visibility: showAll,
+    todoList: [] // { text, priority }
 };
 
-
-function todos(state = [], action) {
-
-}
-
-function todoApp(state = initialState, action) {
+function mainApp( state = initialState, action ) {
 
     switch (action.type) {
+        case visblFilter: return Object.assign( {},
+            {
+                visibility: action.filter,
+                todoList: state.todoList
+            }
+        );
 
-        case SET_VISIBILITY_FILTER: {
+        case add: return  Object.assign( {},
+            {
+                visibility: state.visibility,
+                todoList: [...state.todoList, { text: action.text, priority: action.priority ? action.priority : 'medium' } ]
+            }
+        );
+
+        case rmv:
+            let tempArr = [];
+            for ( let i=0; i< state.todoList.length; i++ ) {
+                if( i !== action.index ) tempArr.push(state.todoList[i]);
+            }
             return Object.assign( {},
-                state,
-                { visibilityFilter: action.filter }
-            )
-        }
+            {
+                visibility: state.visibility,
+                todoList: tempArr
+            }
+        );
+        case tgl:
 
-        case ADD_TODO: {
-            return Object.assign( {},
-                state,
-                {
-                    todos: [ ...state.todos, { text: action.text, completed: false } ]
-                }
-            )
-        }
-
-        case TOGGLE_TODO: {
-            return Object.assign( {}, state,
-                {
-                    todos: state.todos.map( (item, index) => {
-                        if( index === action.index ) {
-                            return Object.assign( {},
-                                item,
-                                {
-                                    completed: !item.completed
-                                }
-                            )
-                        }
-                        return item
-                    } )
-                }
-            )
-        }
 
         default: return state;
     }
+
 }
 
-let store = createStore( todoApp );
-
+let store = createStore(mainApp);
 store.subscribe( function () {
-    console.log( store.getState() )
+    console.log(store.getState());
 } );
 
+store.dispatch( { type: visblFilter, filter: showAct } );
+store.dispatch( { type: visblFilter, filter: showSuc } );
+store.dispatch( { type: add, text: 'Lift It Up!' } );
+store.dispatch( { type: add, text: 'Lift It Left!', priority: 'high' } );
+store.dispatch( { type: rmv, index: 0 } );
+store.dispatch( { type: rmv, index: 1 } ); // indexes will be changed after nex iteration
 
-store.dispatch( { type: ADD_TODO, text: 'Lift It Up!' } );
-store.dispatch( { type: SET_VISIBILITY_FILTER, filter: VisibilityFilters.SHOW_ACTIVE } );
-store.dispatch( { type: ADD_TODO, text: 'Bring It Up!' } );
-store.dispatch( { type: TOGGLE_TODO, index: 1 } );
-store.dispatch( { type: TOGGLE_TODO, index: 0 } );
