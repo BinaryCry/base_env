@@ -40,7 +40,6 @@ function todoListItemHAndlers( state, action ) {
     }
 }
 
-
 function mainApp( state = initialState, action ) {
     switch (action.type) {
         case visblFilter: return Object.assign( {},
