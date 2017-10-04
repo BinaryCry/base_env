@@ -1,15 +1,10 @@
 import { createStore } from 'redux';
+import { add, rmv, tgl, visblFilter } from './actions';
 
 // filters
 const showAll = 'SHOW_ALL';
 const showAct = 'SHOW_ACTIVE';
 const showSuc = 'SHOW_SUCCESS';
-
-// actions
-const add = 'ADD_TODO_ITEM';
-const rmv = 'REMOVE_TODO_ITEM';
-const tgl ='TOGGLE_TODO_ITEM';
-const visblFilter ='SET_VISIBILITY_FILTER';
 
 // priorities
 const prHigh = 'PRIORITY_HIGH';
@@ -71,6 +66,6 @@ store.dispatch( { type: visblFilter, filter: showSuc } );
 store.dispatch( { type: add, text: 'Lift It Up!' } );
 store.dispatch( { type: add, text: 'Lift It Left!', priority: prHigh } );
 store.dispatch( { type: rmv, index: 0 } );
-// store.dispatch( { type: rmv, index: 1 } ); // indexes will be changed after nex iteration
+// store.dispatch( { type: rmv, index: 0 } ); // indexes will be changed after nex iteration
 store.dispatch( { type: tgl, index: 0, priority: prLow } );
 
