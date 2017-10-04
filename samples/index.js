@@ -20,4 +20,4 @@ store.dispatch( { type: add, text: 'Lift It Left!', priority: prHigh } );
 store.dispatch( { type: rmv, index: 0 } );
 // store.dispatch( { type: rmv, index: 0 } ); // indexes will be changed after nex iteration
 store.dispatch( { type: tgl, index: 0, priority: prLow } );
-
+store.dispatch( { type: tgl, index: 0, priority: prMedium } );
