@@ -16,7 +16,20 @@ let initialState = {
     todoList: [] // { text, priority }
 };
 
-function todoListItemHAndlers( state, action ) {
+
+function visibilityToggler( state, action ) {
+    switch (action.type) {
+        case visblFilter: return Object.assign( {},
+            {
+                visibility: action.filter,
+                todoList: state.todoList
+            }
+        );
+    }
+
+}
+
+function todoListItemHAndlers( state = [], action ) {
     switch (action.type) {
         case add: return [...state.todoList, { text: action.text, priority: action.priority ? action.priority : prMedium } ];
         case rmv:
@@ -31,18 +44,14 @@ function todoListItemHAndlers( state, action ) {
                     item.priority = action.priority;
                     return item;
                 } else return item;
-            } )
+            } );
+        default: return state;
     }
 }
 
 function mainApp( state = initialState, action ) {
     switch (action.type) {
-        case visblFilter: return Object.assign( {},
-            {
-                visibility: action.filter,
-                todoList: state.todoList
-            }
-        );
+        case visblFilter: return visibilityToggler(state, action);
         case add:
         case rmv:
         case tgl:
