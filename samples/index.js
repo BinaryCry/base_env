@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { add, rmv, tgl, visblFilter } from './actions';
 
 // filters
@@ -44,12 +44,18 @@ function todoListItemHAndlers( state = [], action ) {
     }
 }
 
-function mainApp( state = {}, action ) {
+/*function mainApp( state = {}, action ) {
     return {
         visibility: visibilityToggler(state.visibility, action),
         todoList: todoListItemHAndlers(state.todoList, action)
     };
-}
+}*/
+
+const mainApp = combineReducers({
+    visibility: visibilityToggler, // [visibility]: visibilityToggler(state.[visibility], action) // names are that same
+    todoList: todoListItemHAndlers
+});
+
 
 let store = createStore(mainApp);
 store.subscribe( function () {
