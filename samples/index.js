@@ -11,6 +11,11 @@ const rmv = 'REMOVE_TODO_ITEM';
 const tgl ='TOGGLE_TODO_ITEM';
 const visblFilter ='SET_VISIBILITY_FILTER';
 
+// priorities
+const prHigh = 'PRIORITY_HIGH';
+const prMedium = 'PRIORITY_MEDIUM';
+const prLow = 'PRIORITY_LOW';
+
 let initialState = {
     visibility: showAll,
     todoList: [] // { text, priority }
@@ -29,7 +34,7 @@ function mainApp( state = initialState, action ) {
         case add: return  Object.assign( {},
             {
                 visibility: state.visibility,
-                todoList: [...state.todoList, { text: action.text, priority: action.priority ? action.priority : 'medium' } ]
+                todoList: [...state.todoList, { text: action.text, priority: action.priority ? action.priority : prMedium } ]
             }
         );
 
@@ -45,7 +50,17 @@ function mainApp( state = initialState, action ) {
             }
         );
         case tgl:
-
+             return Object.assign( {},
+                 {
+                     visibility: state.visibility,
+                     todoList: state.todoList.map( (item, index) => {
+                         if( index === action.index ) {
+                             item.priority = action.priority;
+                             return item;
+                         } else return item;
+                     } )
+                 }
+             );
 
         default: return state;
     }
@@ -60,7 +75,8 @@ store.subscribe( function () {
 store.dispatch( { type: visblFilter, filter: showAct } );
 store.dispatch( { type: visblFilter, filter: showSuc } );
 store.dispatch( { type: add, text: 'Lift It Up!' } );
-store.dispatch( { type: add, text: 'Lift It Left!', priority: 'high' } );
+store.dispatch( { type: add, text: 'Lift It Left!', priority: prHigh } );
 store.dispatch( { type: rmv, index: 0 } );
-store.dispatch( { type: rmv, index: 1 } ); // indexes will be changed after nex iteration
+// store.dispatch( { type: rmv, index: 1 } ); // indexes will be changed after nex iteration
+store.dispatch( { type: tgl, index: 0, priority: prLow } );
 
