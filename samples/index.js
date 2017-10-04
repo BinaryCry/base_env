@@ -21,8 +21,27 @@ let initialState = {
     todoList: [] // { text, priority }
 };
 
-function mainApp( state = initialState, action ) {
+function todoListItemHAndlers( state, action ) {
+    switch (action.type) {
+        case add: return [...state.todoList, { text: action.text, priority: action.priority ? action.priority : prMedium } ];
+        case rmv:
+            let tempArr = [];
+            for ( let i=0; i< state.todoList.length; i++ ) {
+                if( i !== action.index ) tempArr.push(state.todoList[i]);
+            }
+            return tempArr;
+        case tgl:
+            return state.todoList.map( (item, index) => {
+                if( index === action.index ) {
+                    item.priority = action.priority;
+                    return item;
+                } else return item;
+            } )
+    }
+}
 
+
+function mainApp( state = initialState, action ) {
     switch (action.type) {
         case visblFilter: return Object.assign( {},
             {
@@ -30,41 +49,17 @@ function mainApp( state = initialState, action ) {
                 todoList: state.todoList
             }
         );
-
-        case add: return  Object.assign( {},
-            {
-                visibility: state.visibility,
-                todoList: [...state.todoList, { text: action.text, priority: action.priority ? action.priority : prMedium } ]
-            }
-        );
-
+        case add:
         case rmv:
-            let tempArr = [];
-            for ( let i=0; i< state.todoList.length; i++ ) {
-                if( i !== action.index ) tempArr.push(state.todoList[i]);
-            }
-            return Object.assign( {},
+        case tgl:
+            return  Object.assign( {},
             {
                 visibility: state.visibility,
-                todoList: tempArr
+                todoList: todoListItemHAndlers( state, action )
             }
         );
-        case tgl:
-             return Object.assign( {},
-                 {
-                     visibility: state.visibility,
-                     todoList: state.todoList.map( (item, index) => {
-                         if( index === action.index ) {
-                             item.priority = action.priority;
-                             return item;
-                         } else return item;
-                     } )
-                 }
-             );
-
         default: return state;
     }
-
 }
 
 let store = createStore(mainApp);
