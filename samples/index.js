@@ -11,35 +11,30 @@ const prHigh = 'PRIORITY_HIGH';
 const prMedium = 'PRIORITY_MEDIUM';
 const prLow = 'PRIORITY_LOW';
 
-let initialState = {
+/*let initialState = {
     visibility: showAll,
     todoList: [] // { text, priority }
-};
+};*/
 
 
-function visibilityToggler( state, action ) {
+function visibilityToggler( state = showAll, action ) {
     switch (action.type) {
-        case visblFilter: return Object.assign( {},
-            {
-                visibility: action.filter,
-                todoList: state.todoList
-            }
-        );
+        case visblFilter: return action.filter;
+        default: return state;
     }
-
 }
 
 function todoListItemHAndlers( state = [], action ) {
     switch (action.type) {
-        case add: return [...state.todoList, { text: action.text, priority: action.priority ? action.priority : prMedium } ];
+        case add: return [...state, { text: action.text, priority: action.priority ? action.priority : prMedium } ];
         case rmv:
             let tempArr = [];
-            for ( let i=0; i< state.todoList.length; i++ ) {
-                if( i !== action.index ) tempArr.push(state.todoList[i]);
+            for ( let i=0; i< state.length; i++ ) {
+                if( i !== action.index ) tempArr.push(state[i]);
             }
             return tempArr;
         case tgl:
-            return state.todoList.map( (item, index) => {
+            return state.map( (item, index) => {
                 if( index === action.index ) {
                     item.priority = action.priority;
                     return item;
@@ -49,20 +44,11 @@ function todoListItemHAndlers( state = [], action ) {
     }
 }
 
-function mainApp( state = initialState, action ) {
-    switch (action.type) {
-        case visblFilter: return visibilityToggler(state, action);
-        case add:
-        case rmv:
-        case tgl:
-            return  Object.assign( {},
-            {
-                visibility: state.visibility,
-                todoList: todoListItemHAndlers( state, action )
-            }
-        );
-        default: return state;
-    }
+function mainApp( state = {}, action ) {
+    return {
+        visibility: visibilityToggler(state.visibility, action),
+        todoList: todoListItemHAndlers(state.todoList, action)
+    };
 }
 
 let store = createStore(mainApp);
