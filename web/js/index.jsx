@@ -1,7 +1,12 @@
 import React  from 'react';
 import { render } from 'react-dom'
 
-console.log(React);
+function retElem() {
+    return <div>Function which returns simple element</div>
+}
+function GeetBlock(props) {
+    return props.name && typeof props.name === 'string' ? <h2>Hello, { props.name }</h2> : '';
+}
 
 
 class News extends React.Component {
@@ -11,7 +16,9 @@ class News extends React.Component {
     render() {
         return (
             <div>
-                <h1>Hello, User!</h1>
+                <h1>{ React.version }</h1>
+                <GeetBlock name="John" />
+                { retElem() }
             </div>
         )
     }

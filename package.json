@@ -7,7 +7,7 @@
     "test": "./node_modules/babel-cli/bin/babel-node.js test.js",
     "samp": "./node_modules/babel-cli/bin/babel-node.js ./samples/index.js",
     "start": "cd ./web && http-server",
-    "es6react": "./node_modules/.bin/babel ./web/js/index.jsx > ./web/js/index.js && browserify ./web/js/index.js -o ./web/js/index.js ",
+    "es6react": "./node_modules/.bin/babel ./web/js/index.jsx > ./web/js/index.js && browserify ./web/js/index.js -o ./web/js/bundle.js ",
     "less": "./node_modules/less/bin/lessc ./web/style/index.less > ./web/style/index.css && echo less done",
     "server": "./node_modules/.bin/babel ./server.js > ./out.js && echo server done",
     "es6server": "./node_modules/babel-cli/bin/babel-node.js server_es6.js",
