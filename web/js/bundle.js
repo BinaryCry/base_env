@@ -20973,7 +20973,7 @@ function retElem() {
 function GeetBlock(props) {
     return props.name && typeof props.name === 'string' ? _react2.default.createElement(
         'h2',
-        null,
+        { onClick: props.handler },
         'Hello, ',
         props.name
     ) : '';
@@ -20985,10 +20985,19 @@ var News = function (_React$Component) {
     function News(props) {
         _classCallCheck(this, News);
 
-        return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+
+        _this.handlerClick = _this.handlerClick.bind(_this);
+        return _this;
     }
 
     _createClass(News, [{
+        key: 'handlerClick',
+        value: function handlerClick() {
+            alert('handlerClick');
+            console.log(this);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -20999,7 +21008,7 @@ var News = function (_React$Component) {
                     null,
                     _react2.default.version
                 ),
-                _react2.default.createElement(GeetBlock, { name: 'John' }),
+                _react2.default.createElement(GeetBlock, { name: 'John', handler: this.handlerClick }),
                 retElem()
             );
         }
