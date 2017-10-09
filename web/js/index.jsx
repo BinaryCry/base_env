@@ -1,34 +1,34 @@
-import React  from 'react';
+import React, { Component }  from 'react';
 import { render } from 'react-dom'
 
-function retElem() {
-    return <div>Function which returns simple element</div>
+
+
+function HelloUser() {
+    return <div>Hello, User</div>
 }
-function GeetBlock(props) {
-    return props.name && typeof props.name === 'string' ? <h2 onClick={props.handler}>Hello, { props.name }</h2> : '';
+function SignUpIn() {
+    return <div>Please Sign Up or Sign In</div>
 }
 
 
-class News extends React.Component {
+
+class SignForm extends Component {
     constructor(props) {
         super(props);
-        this.handlerClick = this.handlerClick.bind(this);
-    }
+        this.state = {
 
-    handlerClick() {
-        alert('handlerClick');
-        console.log(this)
+        }; // prevState setState()
     }
     render() {
         return (
-            <div>
-                <h1>{ React.version }</h1>
-                <GeetBlock name="John" handler={this.handlerClick} />
-                { retElem() }
-            </div>
+            <form action="/">
+                <Geet params={this.props} onClick={this.handleClick} />
+            </form>
         )
+    }
+    handleClick() {
+        alert(1)
     }
 }
 
-render(<News />, document.getElementById('root'));
-
+render( <SignForm logstatus={ false } data={ { name: 'John' } } />, document.getElementById('root') );

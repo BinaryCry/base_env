@@ -20963,61 +20963,57 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function retElem() {
+function Geet(props) {
+
+    console.log(props);
+
+    if (props.params.logstatus) {
+        return _react2.default.createElement(
+            'div',
+            { onClick: props.onClick },
+            'Hello, ',
+            props.params.data.name
+        );
+    }
     return _react2.default.createElement(
         'div',
-        null,
-        'Function which returns simple element'
+        { onClick: props.onClick },
+        'Please SignIn or SignUp!'
     );
 }
-function GeetBlock(props) {
-    return props.name && typeof props.name === 'string' ? _react2.default.createElement(
-        'h2',
-        { onClick: props.handler },
-        'Hello, ',
-        props.name
-    ) : '';
-}
 
-var News = function (_React$Component) {
-    _inherits(News, _React$Component);
+var SignForm = function (_Component) {
+    _inherits(SignForm, _Component);
 
-    function News(props) {
-        _classCallCheck(this, News);
+    function SignForm(props) {
+        _classCallCheck(this, SignForm);
 
-        var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (SignForm.__proto__ || Object.getPrototypeOf(SignForm)).call(this, props));
 
-        _this.handlerClick = _this.handlerClick.bind(_this);
+        _this.state = {}; // prevState setState()
         return _this;
     }
 
-    _createClass(News, [{
-        key: 'handlerClick',
-        value: function handlerClick() {
-            alert('handlerClick');
-            console.log(this);
-        }
-    }, {
+    _createClass(SignForm, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    _react2.default.version
-                ),
-                _react2.default.createElement(GeetBlock, { name: 'John', handler: this.handlerClick }),
-                retElem()
+                'form',
+                { action: '/' },
+                _react2.default.createElement(Geet, { params: this.props, onClick: this.handleClick })
             );
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick() {
+            alert(1);
         }
     }]);
 
-    return News;
-}(_react2.default.Component);
+    return SignForm;
+}(_react.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(News, null), document.getElementById('root'));
+(0, _reactDom.render)(_react2.default.createElement(SignForm, { logstatus: false, data: { name: 'John' } }), document.getElementById('root'));
 
 
 },{"react":31,"react-dom":28}]},{},[32]);
