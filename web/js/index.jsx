@@ -11,9 +11,26 @@ function LoginButton(props) {
 function LogOutButton(props) {
     return <button onClick={props.onClick}>Log Out</button>
 }
-function RegLink(props) {
+/*function RegLink(props) {
     if( props.logstatus ) return null;
     return <a href="/registration">registration</a>
+}*/
+
+
+class RegLink extends Component {
+    constructor(props) {
+        super(props);
+    }
+    componentDidUpdate() {
+        console.log('update');
+    }
+    componentDidMount() {
+        console.log('Mount');
+    }
+    render() {
+        if( this.props.logstatus ) return null;
+        return <a href="/registration">registration</a>
+    }
 }
 
 class SignForm extends Component {

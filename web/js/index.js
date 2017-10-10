@@ -42,29 +42,59 @@ function LogOutButton(props) {
         'Log Out'
     );
 }
-function RegLink(props) {
-    if (props.logstatus) return null;
-    return _react2.default.createElement(
-        'a',
-        { href: '/registration' },
-        'registration'
-    );
-}
+/*function RegLink(props) {
+    if( props.logstatus ) return null;
+    return <a href="/registration">registration</a>
+}*/
 
-var SignForm = function (_Component) {
-    _inherits(SignForm, _Component);
+var RegLink = function (_Component) {
+    _inherits(RegLink, _Component);
+
+    function RegLink(props) {
+        _classCallCheck(this, RegLink);
+
+        return _possibleConstructorReturn(this, (RegLink.__proto__ || Object.getPrototypeOf(RegLink)).call(this, props));
+    }
+
+    _createClass(RegLink, [{
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+            console.log('update');
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('Mount');
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.props.logstatus) return null;
+            return _react2.default.createElement(
+                'a',
+                { href: '/registration' },
+                'registration'
+            );
+        }
+    }]);
+
+    return RegLink;
+}(_react.Component);
+
+var SignForm = function (_Component2) {
+    _inherits(SignForm, _Component2);
 
     function SignForm(props) {
         _classCallCheck(this, SignForm);
 
-        var _this = _possibleConstructorReturn(this, (SignForm.__proto__ || Object.getPrototypeOf(SignForm)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (SignForm.__proto__ || Object.getPrototypeOf(SignForm)).call(this, props));
 
-        _this.state = {
+        _this2.state = {
             logstatus: false
         };
-        _this.login = _this.login.bind(_this);
-        _this.logout = _this.logout.bind(_this);
-        return _this;
+        _this2.login = _this2.login.bind(_this2);
+        _this2.logout = _this2.logout.bind(_this2);
+        return _this2;
     }
 
     _createClass(SignForm, [{
