@@ -12,11 +12,14 @@ class UppCase extends Component{
     }
 
     change(event) {
-        let originalValue = event.target.value.toUpperCase();
-        setTimeout(function () {
-            console.log(value);
-        }, 250);
+        let originalKeyValue = event.target.value[event.target.value.length-1];
+
+        let originalValue = event.target.value;
         this.setState( { value: originalValue } );
+        setTimeout(function () {
+            this.setState( { value: originalValue.toUpperCase() } );
+        }.bind(this), 250);
+
     }
 
     formSubmit(event) {

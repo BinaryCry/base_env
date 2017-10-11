@@ -20979,11 +20979,13 @@ var UppCase = function (_Component) {
     _createClass(UppCase, [{
         key: 'change',
         value: function change(event) {
-            var originalValue = event.target.value.toUpperCase();
-            setTimeout(function () {
-                console.log(value);
-            }, 250);
+            var originalKeyValue = event.target.value[event.target.value.length - 1];
+
+            var originalValue = event.target.value;
             this.setState({ value: originalValue });
+            setTimeout(function () {
+                this.setState({ value: originalValue.toUpperCase() });
+            }.bind(this), 250);
         }
     }, {
         key: 'formSubmit',
