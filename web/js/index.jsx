@@ -1,70 +1,52 @@
 import React, { Component }  from 'react';
 import { render } from 'react-dom'
 
-function Geet(props) {
-    if (props.logstatus) return <div>Hello, user!</div>;
-    return <div>Please Sign Up or Sign In</div>
-}
-function LoginButton(props) {
-    return <button onClick={props.onClick}>Please Log In</button>
-}
-function LogOutButton(props) {
-    return <button onClick={props.onClick}>Log Out</button>
-}
-/*function RegLink(props) {
-    if( props.logstatus ) return null;
-    return <a href="/registration">registration</a>
-}*/
+
+let posts = [
+    {
+        id: 765,
+        title: 'Title 1',
+        thumb: '/img/Doc.jpg',
+    },
+    {
+        id: 321,
+        title: 'Title 2',
+        thumb: '/img/Rocky.png',
+    }
+];
 
 
-class RegLink extends Component {
+function PostImg(props) {
+    return <img src={props.src} alt=""/>
+}
+
+function Post(props) {
+    return (
+        <li>
+            <p>{props.data.title}</p>
+            <div>
+                <PostImg src={props.data.thumb} />
+            </div>
+        </li>
+    )
+}
+
+class News extends Component {
     constructor(props) {
         super(props);
     }
-    componentDidUpdate() {
-        console.log('update');
-    }
-    componentDidMount() {
-        console.log('Mount');
-    }
     render() {
-        if( this.props.logstatus ) return null;
-        return <a href="/registration">registration</a>
-    }
-}
-
-class SignForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            logstatus: false
-        };
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
-    }
-    render() {
-        let logstatus = this.state.logstatus;
-        let button = null;
-
-        if (logstatus)
-            button = <LogOutButton onClick={ this.logout }/>;
-        else button = <LoginButton onClick={ this.login }/>;
+        let posts = this.props.data.map( item => <Post key={ item.id } data={ item } /> );
 
         return (
-            <div>
-                <Geet logstatus={ this.state.logstatus } />
-                { button }
-                <br/>
-                <RegLink logstatus={ this.state.logstatus } />
-            </div>
-        );
-    }
-    login() {
-        this.setState( prevState => ({ logstatus: !prevState.logstatus }) );
-    }
-    logout() {
-        this.setState( function(prevState) { return { logstatus: !prevState.logstatus } }  );
+            <ul>
+                { posts }
+            </ul>
+        )
+
     }
 }
 
-render( <SignForm />, document.getElementById('root') );
+
+
+render( <News data={ posts } />, document.getElementById('root') );
