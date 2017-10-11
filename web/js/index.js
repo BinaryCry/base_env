@@ -16,63 +16,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var posts = [{
-    id: 765,
-    title: 'Title 1',
-    thumb: '/img/Doc.jpg'
-}, {
-    id: 321,
-    title: 'Title 2',
-    thumb: '/img/Rocky.png'
-}];
+var UppCase = function (_Component) {
+    _inherits(UppCase, _Component);
 
-function PostImg(props) {
-    return _react2.default.createElement('img', { src: props.src, alt: '' });
-}
+    function UppCase(props) {
+        _classCallCheck(this, UppCase);
 
-function Post(props) {
-    return _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-            'p',
-            null,
-            props.data.title
-        ),
-        _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(PostImg, { src: props.data.thumb })
-        )
-    );
-}
+        var _this = _possibleConstructorReturn(this, (UppCase.__proto__ || Object.getPrototypeOf(UppCase)).call(this, props));
 
-var News = function (_Component) {
-    _inherits(News, _Component);
-
-    function News(props) {
-        _classCallCheck(this, News);
-
-        return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+        _this.state = { value: '' };
+        _this.change = _this.change.bind(_this);
+        return _this;
     }
 
-    _createClass(News, [{
+    _createClass(UppCase, [{
+        key: 'change',
+        value: function change(event) {
+            var originalValue = event.target.value.toUpperCase();
+            setTimeout(function () {
+                console.log(value);
+            }, 250);
+            this.setState({ value: originalValue });
+        }
+    }, {
+        key: 'formSubmit',
+        value: function formSubmit(event) {
+            alert('Now in state: ' + this.state.value);
+            event.preventDefault();
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var posts = this.props.data.map(function (item) {
-                return _react2.default.createElement(Post, { key: item.id, data: item });
-            });
-
             return _react2.default.createElement(
-                'ul',
-                null,
-                posts
+                'form',
+                { action: '/', onSubmit: this.formSubmit },
+                _react2.default.createElement('input', { type: 'text', onChange: this.change, value: this.state.value }),
+                _react2.default.createElement('input', { type: 'submit', value: 'Send' })
             );
         }
     }]);
 
-    return News;
+    return UppCase;
 }(_react.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(News, { data: posts }), document.getElementById('root'));
+(0, _reactDom.render)(_react2.default.createElement(UppCase, null), document.getElementById('root'));
 

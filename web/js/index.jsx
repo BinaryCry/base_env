@@ -2,51 +2,39 @@ import React, { Component }  from 'react';
 import { render } from 'react-dom'
 
 
-let posts = [
-    {
-        id: 765,
-        title: 'Title 1',
-        thumb: '/img/Doc.jpg',
-    },
-    {
-        id: 321,
-        title: 'Title 2',
-        thumb: '/img/Rocky.png',
-    }
-];
 
 
-function PostImg(props) {
-    return <img src={props.src} alt=""/>
-}
-
-function Post(props) {
-    return (
-        <li>
-            <p>{props.data.title}</p>
-            <div>
-                <PostImg src={props.data.thumb} />
-            </div>
-        </li>
-    )
-}
-
-class News extends Component {
+class UppCase extends Component{
     constructor(props) {
         super(props);
+        this.state = {value: ''};
+        this.change = this.change.bind(this);
     }
+
+    change(event) {
+        let originalValue = event.target.value.toUpperCase();
+        setTimeout(function () {
+            console.log(value);
+        }, 250);
+        this.setState( { value: originalValue } );
+    }
+
+    formSubmit(event) {
+        alert(`Now in state: ${this.state.value}`);
+        event.preventDefault();
+    }
+
     render() {
-        let posts = this.props.data.map( item => <Post key={ item.id } data={ item } /> );
-
         return (
-            <ul>
-                { posts }
-            </ul>
+            <form action="/" onSubmit={this.formSubmit}>
+                <input type="text" onChange={this.change} value={this.state.value} />
+                <input type="submit" value='Send' />
+            </form>
         )
-
     }
 }
 
 
 
-render( <News data={ posts } />, document.getElementById('root') );
+
+render( <UppCase />, document.getElementById('root') );
