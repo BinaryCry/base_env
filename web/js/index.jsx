@@ -1,43 +1,84 @@
 import React, { Component }  from 'react';
 import { render } from 'react-dom'
 
-
-
-
-class UppCase extends Component{
+class TempInput extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
-        this.change = this.change.bind(this);
     }
-
-    change(event) {
-        let originalKeyValue = event.target.value[event.target.value.length-1];
-
-        let originalValue = event.target.value;
-        this.setState( { value: originalValue } );
-        setTimeout(function () {
-            this.setState( { value: originalValue.toUpperCase() } );
-        }.bind(this), 250);
-
-    }
-
-    formSubmit(event) {
-        alert(`Now in state: ${this.state.value}`);
-        event.preventDefault();
-    }
-
     render() {
-        return (
-            <form action="/" onSubmit={this.formSubmit}>
-                <input type="text" onChange={this.change} value={this.state.value} />
-                <input type="submit" value='Send' />
-            </form>
+        return <p>Input in {this.props.scale}: <input onChange={this.props.onTeempChange} type="text" value={this.props.currentTemp}/></p>
+    }
+}
+class BoilVerdict extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return(
+            <p>
+                <b>{this.props.substance} is { this.props.temp >= this.props.boilTemp ? '' : 'not' } boiled</b>
+            </p>
+        )
+    }
+}
+class Boil extends Component {
+    constructor(props) {
+        super(props);
+        this.fahrenheitState = this.fahrenheitState.bind(this);
+        this.celsiumState = this.celsiumState.bind(this);
+        this.boilTemps = {
+            water: {
+                c: 100,
+                f: 212
+            }
+        };
+        this.scales = {
+            f: 'Fahrenheit',
+            c: 'Celsium'
+        };
+        this.initialState = {
+            f_degr: '',
+            c_degr: ''
+        };
+        this.state = this.initialState;
+    }
+    fahrenheitState(syntEvent) {
+        let value = syntEvent.target.value;
+        if( value == '' ) {
+            this.setState(this.initialState);
+            return false;
+        }
+        let  c_degr = Math.round(((value - 32) * 5 / 9) * 10) / 10;
+        this.setState(
+            {
+                f_degr: value,
+                c_degr: !c_degr ? 'incorrect' : c_degr
+            }
+        );
+    }
+    celsiumState(syntEvent) {
+        let value = syntEvent.target.value;
+        if( value == '' ) {
+            this.setState(this.initialState);
+            return false;
+        }
+        let f_degr = Math.round(((value * 9 / 5) + 32) * 10) / 10;
+        this.setState(
+            {
+                c_degr: value,
+                f_degr: !f_degr ? 'incorrect' : f_degr
+            }
+        );
+    }
+    render() {
+        return(
+            <div>
+                <TempInput scale={this.scales.c} onTeempChange={this.celsiumState} currentTemp={this.state.c_degr} />
+                <TempInput scale={this.scales.f} onTeempChange={this.fahrenheitState} currentTemp={this.state.f_degr} />
+                <BoilVerdict temp={this.state.c_degr} substance={this.props.substance} boilTemp={this.boilTemps[this.props.substance].c} />
+            </div>
         )
     }
 }
 
-
-
-
-render( <UppCase />, document.getElementById('root') );
+render( <Boil substance="water" />, document.getElementById('root') );
