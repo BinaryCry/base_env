@@ -23144,14 +23144,14 @@ store.subscribe(function () {
     console.log(store.getState());
 });
 
-store.dispatch({ type: _actions.visblFilter, filter: _filters.showAct });
-store.dispatch({ type: _actions.visblFilter, filter: _filters.showSuc });
-store.dispatch({ type: _actions.add, text: 'Lift It Up!' });
-store.dispatch({ type: _actions.add, text: 'Lift It Left!', priority: _priorities.prHigh });
-store.dispatch({ type: _actions.rmv, index: 0 });
+/*store.dispatch( { type: visblFilter, filter: showAct } );
+store.dispatch( { type: visblFilter, filter: showSuc } );
+store.dispatch( { type: add, text: 'Lift It Up!' } );
+store.dispatch( { type: add, text: 'Lift It Left!', priority: prHigh } );
+store.dispatch( { type: rmv, index: 0 } );
 // store.dispatch( { type: rmv, index: 0 } ); // indexes will be changed after nex iteration
-store.dispatch({ type: _actions.tgl, index: 0, priority: _priorities.prLow });
-store.dispatch({ type: _actions.tgl, index: 0, priority: _priorities.prMedium });
+store.dispatch( { type: tgl, index: 0, priority: prLow } );
+store.dispatch( { type: tgl, index: 0, priority: prMedium } );*/
 
 exports.default = store;
 
@@ -23240,6 +23240,6 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(_index2.default);
+_index2.default.dispatch({ type: visblFilter, filter: showSuc });
 
 },{"../../samples/index":71,"prop-types":36,"react":58,"react-dom":40,"react-redux":50}]},{},[74]);
