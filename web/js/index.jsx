@@ -1,21 +1,11 @@
+'use strict';
+
 import React, { Component }  from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-class Geet extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return <p>Hello, {this.props.user}</p>
-    }
-    foo() {
 
-    }
-}
-Geet.propTypes = {
-    user: PropTypes.string,
-    foo: PropTypes.func.isRequired
-};
+import store from '../../samples/index';
 
-render(<Geet user={1} />, document.getElementById('root'));
+console.log(store);

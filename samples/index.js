@@ -1,3 +1,5 @@
+'use strict';
+
 import { createStore, combineReducers } from 'redux';
 import { add, rmv, tgl, visblFilter } from './actions';
 import { showAll, showAct, showSuc } from './filters';
@@ -21,3 +23,5 @@ store.dispatch( { type: rmv, index: 0 } );
 // store.dispatch( { type: rmv, index: 0 } ); // indexes will be changed after nex iteration
 store.dispatch( { type: tgl, index: 0, priority: prLow } );
 store.dispatch( { type: tgl, index: 0, priority: prMedium } );
+
+export default store;
