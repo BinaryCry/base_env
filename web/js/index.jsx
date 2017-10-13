@@ -9,9 +9,13 @@ class Geet extends Component {
     render() {
         return <p>Hello, {this.props.user}</p>
     }
+    foo() {
+
+    }
 }
 Geet.propTypes = {
-    user: PropTypes.string
+    user: PropTypes.string,
+    foo: PropTypes.func.isRequired
 };
 
 render(<Geet user={1} />, document.getElementById('root'));

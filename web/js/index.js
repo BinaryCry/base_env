@@ -39,13 +39,17 @@ var Geet = function (_Component) {
                 this.props.user
             );
         }
+    }, {
+        key: 'foo',
+        value: function foo() {}
     }]);
 
     return Geet;
 }(_react.Component);
 
 Geet.propTypes = {
-    user: _propTypes2.default.string
+    user: _propTypes2.default.string,
+    foo: _propTypes2.default.func.isRequired
 };
 
 (0, _reactDom.render)(_react2.default.createElement(Geet, { user: 1 }), document.getElementById('root'));
