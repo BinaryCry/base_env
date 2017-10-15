@@ -1,4 +1,6 @@
 /node_modules
 /.idea
 npm-debug.log
+
+#other
 /web/croppie/node_modules
