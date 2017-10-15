@@ -10,6 +10,10 @@ gulp.task('transpile', function () {
         .pipe(fs.createWriteStream("./web/js/bundle.js"));
 });
 
+gulp.task('default', function(){
+   console.log('default');
+});
+
 
 
 
