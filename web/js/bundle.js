@@ -23240,6 +23240,6 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_index2.default.dispatch({ type: visblFilter, filter: showSuc });
+console.log(_index2.default);
 
 },{"../../samples/index":71,"prop-types":36,"react":58,"react-dom":40,"react-redux":50}]},{},[74]);
