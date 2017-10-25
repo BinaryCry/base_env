@@ -10,10 +10,8 @@ import * as reducers from './reducers';
 const mainApp = combineReducers(reducers);
 
 let store = createStore(mainApp, { visibility: showAll, todoList: [] });
-console.log(store.getState());
-store.subscribe( function () {
-    console.log(store.getState());
-} );
+
+// subscribe
 
 /*store.dispatch( { type: visblFilter, filter: showAct } );
 store.dispatch( { type: visblFilter, filter: showSuc } );
