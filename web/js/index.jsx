@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { createStorage } from 'redux'
 import { connect } from 'react-redux'
 
-
 const myToggler = function (state, type) {
     switch(type) {
         case 'TOGGLE': let current = state.checked; return !current;
@@ -77,12 +76,13 @@ let range = {
     }
 };
 
+//iterators
 /*for(let num of range) {
     console.log(num);
 }
 console.log( Math.max(...range) );*/
 
-let arr = [1,2,3,4,5];
+/*let arr = [1,2,3,4,5];
 
 const iterator = arr[Symbol.iterator]();
 
@@ -90,4 +90,19 @@ while(true) {
     let result = iterator.next();
     if(result.done) break;
     console.log(result.value);
+}*/
+
+//generators
+function* genRandom() {
+    let min = 1;
+    let max = 10;
+    yield Math.floor(Math.random() * (max - min)) + min;
+    yield Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
+
+let generator = genRandom();
+console.log( generator.next() )
+console.log( generator.next() )
+console.log( generator.next() )
+console.log( generator.next() )

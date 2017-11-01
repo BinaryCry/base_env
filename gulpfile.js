@@ -5,7 +5,7 @@ var fs = require("fs");
 
 gulp.task('transpile', function () {
     return browserify("./web/js/index.jsx")
-        .transform("babelify", {presets: ["env","react","es2015"]})
+        .transform("babelify", {presets: ["env", "react", "es2015", "stage-0"], })
         .bundle()
         .pipe(fs.createWriteStream("./web/js/bundle.js"));
 });
